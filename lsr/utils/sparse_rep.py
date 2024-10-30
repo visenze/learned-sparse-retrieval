@@ -89,7 +89,7 @@ class SparseRep:
             size = self.dense.size()
             return (indices, values, size)
         elif self.format == SparseRep.SPARSE_FORMAT:
-            return (self.indices, self.values, self.size())
+            return (self.indices, self.values, self.size)
         else:
             raise Exception(f"sparse format {self.format} is not available")
 

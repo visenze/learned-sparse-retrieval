@@ -6,8 +6,9 @@ from lsr.models.sparse_encoder import SparseEncoder
 class DualSparseConfig(PretrainedConfig):
     model_type = "DualEncoder"
 
-    def __init__(self, shared=False, **kwargs):
+    def __init__(self, shared=False, base_model_dir="", **kwargs):
         self.shared = shared
+        self.base_model_dir = base_model_dir
         super().__init__(**kwargs)
 
 
@@ -34,17 +35,31 @@ class DualSparseEncoder(PreTrainedModel):
 
     def __init__(
         self,
-        query_encoder: SparseEncoder,
+        query_encoder: SparseEncoder = None,
         doc_encoder: SparseEncoder = None,
         config: DualSparseConfig = DualSparseConfig(),
     ):
         super().__init__(config)
-        self.config = config
-        if self.config.shared:
-            self.encoder = query_encoder
+        if config.base_model_dir != "":
+            model_dir_or_name = config.base_model_dir
+            self.config = DualSparseConfig.from_pretrained(model_dir_or_name)
+            if self.config.shared:
+                self.encoder = AutoModel.from_pretrained(
+                    model_dir_or_name + "/shared_encoder"
+                )
+            else:
+                self.query_encoder = AutoModel.from_pretrained(
+                    model_dir_or_name + "/query_encoder"
+                )
+                self.doc_encoder = AutoModel.from_pretrained(model_dir_or_name + "/doc_encoder")
         else:
-            self.query_encoder = query_encoder
-            self.doc_encoder = doc_encoder
+            self.config = config
+        
+            if self.config.shared:
+                self.encoder = query_encoder
+            else:
+                self.query_encoder = query_encoder
+                self.doc_encoder = doc_encoder
 
     def encode_queries(self, to_dense=True, **queries):
         """
