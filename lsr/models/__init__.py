@@ -1,3 +1,4 @@
+import torch.nn as nn
 from transformers import PreTrainedModel, AutoConfig, PretrainedConfig, AutoModel
 
 from lsr.models.sparse_encoder import SparseEncoder
@@ -6,9 +7,16 @@ from lsr.models.sparse_encoder import SparseEncoder
 class DualSparseConfig(PretrainedConfig):
     model_type = "DualEncoder"
 
-    def __init__(self, shared=False, base_model_dir="", **kwargs):
+    def __init__(self, shared=False, base_model_dir="", classification_num_labels="", **kwargs):
         self.shared = shared
         self.base_model_dir = base_model_dir
+        if classification_num_labels:
+            if type(classification_num_labels) is list:
+                self.classification_num_labels = classification_num_labels
+            else:
+                self.classification_num_labels = [int(x) for x in classification_num_labels.split(",")]
+        else:
+            self.classification_num_labels = []
         super().__init__(**kwargs)
 
 
@@ -43,6 +51,7 @@ class DualSparseEncoder(PreTrainedModel):
         if config.base_model_dir != "":
             model_dir_or_name = config.base_model_dir
             self.config = DualSparseConfig.from_pretrained(model_dir_or_name)
+            self.config.classification_num_labels = config.classification_num_labels
             if self.config.shared:
                 self.encoder = AutoModel.from_pretrained(
                     model_dir_or_name + "/shared_encoder"
@@ -60,6 +69,12 @@ class DualSparseEncoder(PreTrainedModel):
             else:
                 self.query_encoder = query_encoder
                 self.doc_encoder = doc_encoder
+        
+        if self.config.classification_num_labels:
+            self.classifiers = [
+                nn.Linear(30522, num_labels)
+                for num_labels in self.config.classification_num_labels
+            ]
 
     def encode_queries(self, to_dense=True, **queries):
         """
@@ -101,8 +116,18 @@ class DualSparseEncoder(PreTrainedModel):
         """Compute the loss given (queries, docs, labels)"""
         q_reps = self.encode_queries(**queries)
         docs_batch_rep = self.encode_docs(**docs_batch)
+
         if labels is None:
             output = loss(q_reps, docs_batch_rep)
+        elif self.config.classification_num_labels:
+            device = self.encoder.device
+            self.classifiers = [classifier.to(device) for classifier in self.classifiers]
+            q_logits = [classifier(q_reps) for classifier in self.classifiers]
+            docs_batch_logits = [classifier(docs_batch_rep) for classifier in self.classifiers]
+            output = loss(
+                q_reps, docs_batch_rep, q_logits, docs_batch_logits, 
+                labels['q_labels'], labels['doc_labels']
+            )
         else:
             output = loss(q_reps, docs_batch_rep, labels)
         return output

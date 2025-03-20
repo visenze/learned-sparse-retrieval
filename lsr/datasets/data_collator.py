@@ -189,3 +189,56 @@ class PretokenizedGroupCollator:
             return_tensors="pt",
         )
         return {"queries": dict(queries), "docs_batch": dict(doc_groups)}
+
+
+class LabeledDataCollator:
+    "Tokenize and batch of ((query, query label), (pos, pos label), (neg neg label))"
+
+    def __init__(self, tokenizer, q_max_length, d_max_length):
+        self.tokenizer = tokenizer
+        self.q_max_length = q_max_length
+        self.d_max_length = d_max_length
+
+    def __call__(self, batch):
+        batch_queries = []
+        batch_docs = []
+        query_labels = []
+        doc_labels = []
+        for (query, doc_group) in batch:
+            batch_queries.append(query[0])
+            batch_docs.extend([d[0] for d in doc_group])
+            query_labels.append(query[1])
+            doc_labels.extend([d[1] for d in doc_group])
+        tokenized_queries = self.tokenizer(
+            batch_queries,
+            padding=True,
+            truncation=True,
+            max_length=self.q_max_length,
+            return_tensors="pt",
+            return_special_tokens_mask=True,
+        )
+        tokenized_docs = self.tokenizer(
+            batch_docs,
+            padding=True,
+            truncation=True,
+            max_length=self.d_max_length,
+            return_tensors="pt",
+            return_special_tokens_mask=True,
+        )
+        label_num = len(query_labels[0])
+        query_labels = [
+            torch.tensor([label[idx] for label in query_labels])
+            for idx in range(label_num)
+        ]
+        doc_labels = [
+            torch.tensor([label[idx] for label in doc_labels])
+            for idx in range(label_num)
+        ]
+        return {
+            "queries": dict(tokenized_queries),
+            "docs_batch": dict(tokenized_docs),
+            "labels": {
+                "q_labels": query_labels,
+                "doc_labels": doc_labels
+            }
+        }
