@@ -1,0 +1,5 @@
+_target_: lsr.datasets.MultipleNegatives
+collection_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/bge_tuned_v11-2/docs.tsv
+queries_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/bge_tuned_v11-2/queries.tsv
+triplet_ids_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/bge_tuned_v11-2/triplets.tsv
+train_group_size: 8

@@ -1,5 +1,8 @@
 _target_: lsr.datasets.MultipleNegatives
-collection_path: 'irds:msmarco-passage/train/judged'
-queries_path: 'irds:msmarco-passage/train/judged'
-triplet_ids_path: 'irds:msmarco-passage/train/triples-small'
+collection_path: /home/jingwen/.ir_datasets/msmarco-passage/collection.tsv
+queries_path: /home/jingwen/.ir_datasets/msmarco-passage/train/queries.tsv
+triplet_ids_path: /home/jingwen/.ir_datasets/msmarco-passage/train/small.triples.qidpid.tsv
 train_group_size: 8
+# collection_path: 'irds:msmarco-passage/train/judged'
+# queries_path: 'irds:msmarco-passage/train/judged'
+# triplet_ids_path: 'irds:msmarco-passage/train/triples-small'
