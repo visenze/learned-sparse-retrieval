@@ -3,14 +3,14 @@ import os
 import sys
 
 
-long_description = "Learned Sparse Retrieval: https://github.com/thongnt99/learned-sparse-retrieval"
+long_description = "Learned Sparse Retrieval: https://github.com/visenze/learned-sparse-retrieval/"
 
 # Package meta-data.
-NAME = "lsr"
+NAME = "learned-sparse-retrieval"
 DESCRIPTION = "Learned Sparse Retrieval"
 LONG_DESCRIPTION = long_description
-URL = "https://github.com/thongnt99/learned-sparse-retrieval"
-REQUIRES_PYTHON = ">=3.9.0"
+URL = "https://github.com/visenze/learned-sparse-retrieval/"
+REQUIRES_PYTHON = ">=3.8.0"
 VERSION = "0.0.1"
 
 with open("requirements.txt") as f:
