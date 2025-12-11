@@ -6,7 +6,7 @@ import sys
 long_description = "Learned Sparse Retrieval: https://github.com/visenze/learned-sparse-retrieval/"
 
 # Package meta-data.
-NAME = "learned-sparse-retrieval"
+NAME = "lsr"
 DESCRIPTION = "Learned Sparse Retrieval"
 LONG_DESCRIPTION = long_description
 URL = "https://github.com/visenze/learned-sparse-retrieval/"
