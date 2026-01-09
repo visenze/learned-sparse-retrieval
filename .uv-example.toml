@@ -1,0 +1,23 @@
+# Example pyproject.toml for using LSR with uv package manager
+# This demonstrates how to add lsr as a dependency in your project
+
+[project]
+name = "my-project"
+version = "0.1.0"
+description = "Example project using LSR"
+requires-python = ">=3.8"
+
+dependencies = [
+    # Standard PEP 508 format - works with uv
+    "lsr @ git+ssh://git@github.com/visenze/learned-sparse-retrieval.git@1.0.0",
+    
+    # Other dependencies...
+    "numpy>=1.20.0",
+]
+
+# Alternative: Using uv-specific sources (optional)
+# [tool.uv.sources]
+# lsr = { git = "https://github.com/visenze/learned-sparse-retrieval.git", tag = "1.0.0" }
+
+# Install with: uv pip install -e .
+# Or: uv pip install git+ssh://git@github.com/visenze/learned-sparse-retrieval.git@1.0.0

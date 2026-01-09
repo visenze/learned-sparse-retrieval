@@ -1,1 +1,7 @@
 include requirements.txt
+include README.md
+include LICENSE
+recursive-include lsr/configs *.yaml
+recursive-include lsr *.yaml
+global-exclude *.pyc
+global-exclude __pycache__
