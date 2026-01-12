@@ -8,10 +8,6 @@ version = "1.0.0"
 description = "Learned Sparse Retrieval - A package for training and inference with learned sparse retrieval models"
 readme = "README.md"
 requires-python = ">=3.8"
-license = {text = "MIT"}
-authors = [
-    {name = "LSR Team"}
-]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
