@@ -1,0 +1,5 @@
+_target_: lsr.datasets.MultipleNegatives
+collection_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/snapdeal-catalog-title-dedup-splade-v1/docs.tsv
+queries_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/snapdeal-catalog-title-dedup-splade-v1/queries.tsv
+train_group_size: 8
+triplet_ids_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/snapdeal-catalog-title-dedup-splade-v1/triplets.tsv

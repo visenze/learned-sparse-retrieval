@@ -15,13 +15,14 @@ class MultipleNegatives(Dataset):
         collection_path: str,
         queries_path: str,
         triplet_ids_path: str,
-        train_group_size: int,
+        train_group_size: int
     ):
-        self.docs_dict = read_collection(collection_path)
+        self.docs_dict = read_collection(collection_path)[0]
         _, self.query2pos, self.query2neg = read_triplets(triplet_ids_path)
+        queries = read_queries(queries_path)[0]
         self.q_dict = {
             item[0]: item[1]
-            for item in read_queries(queries_path)
+            for item in queries
             if item[0] in self.query2pos
         }
         self.qids = list(self.q_dict.keys())

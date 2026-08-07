@@ -3,3 +3,4 @@ from .triplet_distil_dataset import TripletDistilDataset, TripletIDDistilDataset
 from .tokenized_multiple_negatives import GroupedMarcoTrainDataset
 from .term_recall_dataset import TermRecallDataset
 from .multiple_negatives import MultipleNegatives
+from .multiple_negatives_with_label import MultipleNegativesWithLabel

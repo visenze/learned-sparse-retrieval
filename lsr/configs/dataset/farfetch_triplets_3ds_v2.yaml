@@ -1,0 +1,5 @@
+_target_: lsr.datasets.MultipleNegatives
+collection_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_em/docs.tsv,/home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_with-category-splade-v1/docs.tsv,/home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_attr/docs.tsv
+queries_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_em/queries.tsv,/home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_with-category-splade-v1/queries.tsv,/home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_attr/queries.tsv
+triplet_ids_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_em/triplets.tsv:1,/home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_with-category-splade-v1/triplets.tsv:0.8,/home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_attr/triplets.tsv:0.8
+train_group_size: 8

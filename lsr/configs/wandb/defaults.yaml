@@ -1,5 +1,6 @@
 ---
 setup:
+  # project: jingwen_test
   project: lsr-framework-public
   entity:
   mode: online

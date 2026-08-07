@@ -1,0 +1,5 @@
+_target_: lsr.datasets.MultipleNegativesWithLabel
+collection_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_v2/docs.tsv
+queries_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_v2/queries.tsv
+triplet_ids_path: /home/jingwen/raid-s1/projects/ms_embed_train/training/dataset/farfetch-triplets_v2/triplets.tsv
+train_group_size: 8
