@@ -1,0 +1,5 @@
+_target_: lsr.datasets.MultipleNegatives
+collection_path: /mnt/ssfs/usr/songzheng/vi-multi-search/notebooks/LocalEval/snapdeal_r4_tune_v13/docs.tsv
+queries_path: /mnt/ssfs/usr/songzheng/vi-multi-search/notebooks/LocalEval/snapdeal_r4_tune_v13/queries.tsv
+train_group_size: 8
+triplet_ids_path: /mnt/ssfs/usr/songzheng/vi-multi-search/notebooks/LocalEval/snapdeal_r4_tune_v13/triplets.tsv

@@ -1,0 +1,35 @@
+# @package _global_
+data_collator:
+  _target_: lsr.datasets.data_collator.DataCollator
+defaults:
+- override /dataset@train_dataset: snapdeal_r4_tune_v13_multiple_negative
+- override /loss: multiple_negative_loss
+exp_name: splade_snapdeal_r4_tune_v13_multiple_negative_0.1_0.08
+loss:
+  d_regularizer:
+    T: 50000
+    _target_: lsr.losses.regularizer.FLOPs
+    weight: 0.1
+  q_regularizer:
+    T: 50000
+    _target_: lsr.losses.regularizer.FLOPs
+    weight: 0.08
+model:
+  _target_: lsr.models.DualSparseEncoder
+  config:
+    _target_: lsr.models.DualSparseConfig
+    base_model_dir: /home/songzheng/workspace/learned-sparse-retrieval/outputs/splade_msmarco_distil_flops_0.4_0.5/checkpoint-150000/
+tokenizer:
+  tokenizer_name: distilbert-base-uncased
+training_arguments:
+  dataloader_drop_last: true
+  dataloader_num_workers: 16
+  fp16: true
+  learning_rate: 5e-6
+  max_steps: -1
+  num_train_epochs: 50
+  per_device_train_batch_size: 8
+  save_steps: 10000
+  save_total_limit: 10
+  warmup_ratio: 0.1
+  warmup_steps: 0
