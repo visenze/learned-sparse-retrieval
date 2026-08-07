@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lsr"
+version = "1.0.0"
+description = "Learned Sparse Retrieval - A package for training and inference with learned sparse retrieval models"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["sparse retrieval", "information retrieval", "neural search", "transformers"]
+
+dependencies = [
+    "tokenizers>=0.10.3",
+    "tqdm",
+    "torch>=1.6.0",
+    "torchvision",
+    "numpy",
+    "datasets>=2.11.0",
+    "transformers>=4.6.0,<5.0.0",
+    "hydra-core",
+    "ir_datasets",
+]
+
+[project.urls]
+Homepage = "https://github.com/visenze/learned-sparse-retrieval/"
+Repository = "https://github.com/visenze/learned-sparse-retrieval/"
+Documentation = "https://github.com/visenze/learned-sparse-retrieval/"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "isort>=5.10.0",
+]
+
+[tool.setuptools]
+packages = ["lsr"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+lsr = ["configs/**/*.yaml", "**/*.yaml"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
